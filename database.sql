@@ -22,3 +22,11 @@ create table lessons (
 			updated_at timestamp not null, 
 			course_id bigint references courses(id) not null
 			);
+create table programs (
+			id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY, 
+			name varchar(255) not null, 
+			program_cost decimal (10,2), 
+			program_type varchar(255) not null, 
+			created_at timestamp not null, 
+			updated_at timestamp not null
+			);
