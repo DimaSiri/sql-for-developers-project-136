@@ -43,3 +43,9 @@ create table module_to_program (
 				module_id bigint references modules(id) not null, 
 				program_id bigint references programs(id) not null
 				);
+create table teaching_groups (
+  				id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  				slag varchar(255) not null,
+  				created_at timestamp not null, 
+				updated_at timestamp not null
+  				);
