@@ -49,3 +49,13 @@ create table teaching_groups (
   				created_at timestamp not null, 
 				updated_at timestamp not null
   				);
+create table users (
+  			id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  			name varchar(255) not null,
+  			email varchar(255) not null,
+  			password varchar(255) not null,
+  			teaching_group_id bigint references teaching_groups (id) not null,
+  			type varchar(20) not null,
+  			created_at timestamp not null, 
+			updated_at timestamp not null
+  			);
