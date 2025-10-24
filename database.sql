@@ -1,5 +1,6 @@
 create type enrollments_status as enum('active', 'pending', 'cancelled', 'completed');
 create type payments_status as enum('pending', 'paid', 'failed', 'refunded');
+create type program_status as enum('active', 'completed', 'pending', 'cancelled');
 create table courses (
 			id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY, 
 			name varchar(255) not null, 
@@ -78,3 +79,13 @@ create table payments (
   			created_at timestamp not null, 
 			updated_at timestamp not null
 			);
+create table program_completions (
+  					id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  					user_id bigint references users(id) not null,
+  					program_id bigint references programs(id) not null,
+  					status program_status not null,
+  					start_date date not null,
+  					end_date date,
+  					created_at timestamp not null, 
+					updated_at timestamp not null
+					);
