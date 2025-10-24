@@ -1,3 +1,4 @@
+create type enrollments_status as enum('active', 'pending', 'cancelled', 'completed');
 create table courses (
 			id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY, 
 			name varchar(255) not null, 
@@ -59,3 +60,11 @@ create table users (
   			created_at timestamp not null, 
 			updated_at timestamp not null
   			);
+create table enrollments (
+  				id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  				user_id bigint references users(id) not null,
+  				program_id bigint references programs(id) not null,
+  				status enrollments_status not null,
+                            	created_at timestamp not null, 
+				updated_at timestamp not null
+                            );
