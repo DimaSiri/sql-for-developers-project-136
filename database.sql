@@ -89,3 +89,12 @@ create table program_completions (
   					created_at timestamp not null, 
 					updated_at timestamp not null
 					);
+create table certificates (
+  				id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  				user_id bigint references users(id) not null,
+  				program_id bigint references programs(id) not null,
+  				url text not null,
+  				creation_date date not null,
+  				created_at timestamp not null, 
+				updated_at timestamp not null
+				);
