@@ -98,3 +98,19 @@ create table certificates (
   				created_at timestamp not null, 
 				updated_at timestamp not null
 				);
+create table quizzes (
+  			id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  			lesson_id bigint references lessons(id) not null,
+  			name varchar(255) not null,
+  			content text not null,
+  			created_at timestamp not null, 
+			updated_at timestamp not null
+			);
+create table exercises (
+  			id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  			lesson_id bigint references lessons(id) not null,
+  			name varchar(255) not null,
+  			url text not null,
+  			created_at timestamp not null, 
+			updated_at timestamp not null
+			);
