@@ -1,6 +1,7 @@
 create type enrollments_status as enum('active', 'pending', 'cancelled', 'completed');
 create type payments_status as enum('pending', 'paid', 'failed', 'refunded');
 create type program_status as enum('active', 'completed', 'pending', 'cancelled');
+create type blog_status as enum('created', 'in moderation', 'published', 'archived');
 create table courses (
 			id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY, 
 			name varchar(255) not null, 
@@ -111,6 +112,22 @@ create table exercises (
   			lesson_id bigint references lessons(id) not null,
   			name varchar(255) not null,
   			url text not null,
+  			created_at timestamp not null, 
+			updated_at timestamp not null
+			);
+create table discussions (
+  				id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  				lesson_id bigint references lessons(id) not null,
+  				content text not null,
+  				created_at timestamp not null, 
+				updated_at timestamp not null
+				);
+create table blog (
+  			id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  			user_id bigint references users(id) not null,
+  			title varchar(255) not null,
+  			content text not null,
+  			status blog_status not null,
   			created_at timestamp not null, 
 			updated_at timestamp not null
 			);
