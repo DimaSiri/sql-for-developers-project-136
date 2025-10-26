@@ -122,7 +122,7 @@ create table discussions (
   				created_at timestamp not null, 
 				updated_at timestamp not null
 				);
-create table blog (
+create table blogs (
   			id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   			user_id bigint references users(id) not null,
   			title varchar(255) not null,
