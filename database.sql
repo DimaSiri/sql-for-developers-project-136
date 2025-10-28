@@ -21,18 +21,18 @@ create table modules (
 create table lessons (
 			id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY, 
 			name varchar(255) not null, 
-			description text not null, 
-			video_link varchar(255), 
-			lesson_number int not null, 
+			content text not null, 
+			video_url varchar(255), 
+			position int not null, 
 			created_at timestamp not null, 
 			updated_at timestamp not null, 
 			course_id bigint references courses(id) not null,
-			is_active boolean not null
+			deleted_at timestamp
 			);
 create table programs (
 			id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY, 
 			name varchar(255) not null, 
-			program_cost decimal (10,2), 
+			price decimal (10,2), 
 			program_type varchar(255) not null, 
 			created_at timestamp not null, 
 			updated_at timestamp not null
@@ -49,7 +49,7 @@ create table module_to_program (
 				);
 create table teaching_groups (
   				id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  				slag varchar(255) not null,
+  				slug varchar(255) not null,
   				created_at timestamp not null, 
 				updated_at timestamp not null
   				);
@@ -57,11 +57,12 @@ create table users (
   			id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   			name varchar(255) not null,
   			email varchar(255) not null,
-  			password varchar(255) not null,
+  			password_hash varchar(255) not null,
   			teaching_group_id bigint references teaching_groups (id) not null,
-  			type varchar(20) not null,
+  			role varchar(20) not null,
   			created_at timestamp not null, 
-			updated_at timestamp not null
+			updated_at timestamp not null,
+			deleted_at timestamp
   			);
 create table enrollments (
   				id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -76,7 +77,7 @@ create table payments (
   			enrollment_id bigint references enrollments(id) not null,
   			amount numeric(10,2) not null,
   			status payments_status not null,
-  			payment_day timestamp not null,
+  			paid_at timestamp not null,
   			created_at timestamp not null, 
 			updated_at timestamp not null
 			);
@@ -85,8 +86,8 @@ create table program_completions (
   					user_id bigint references users(id) not null,
   					program_id bigint references programs(id) not null,
   					status program_status not null,
-  					start_date date not null,
-  					end_date date,
+  					started_at date not null,
+  					completed_at date,
   					created_at timestamp not null, 
 					updated_at timestamp not null
 					);
@@ -95,22 +96,23 @@ create table certificates (
   				user_id bigint references users(id) not null,
   				program_id bigint references programs(id) not null,
   				url text not null,
-  				creation_date date not null,
+  				issued_at date not null,
   				created_at timestamp not null, 
 				updated_at timestamp not null
 				);
 create table quizzes (
   			id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   			lesson_id bigint references lessons(id) not null,
+			user_id bigint references users(id) not null,
   			name varchar(255) not null,
-  			content text not null,
+  			text text not null,
   			created_at timestamp not null, 
 			updated_at timestamp not null
 			);
 create table exercises (
   			id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   			lesson_id bigint references lessons(id) not null,
-  			name varchar(255) not null,
+  			title varchar(255) not null,
   			url text not null,
   			created_at timestamp not null, 
 			updated_at timestamp not null
