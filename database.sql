@@ -8,7 +8,7 @@ create table courses (
 			description text not null, 
 			created_at timestamp not null, 
 			updated_at timestamp not null,
-			is_active boolean not null
+			deleted_at timestamp
 			);
 create table modules (
 			id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY, 
@@ -16,7 +16,7 @@ create table modules (
 			description text not null, 
 			created_at timestamp not null, 
 			updated_at timestamp not null,
-			is_active boolean not null
+			deleted_at timestamp
 			);
 create table lessons (
 			id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY, 
@@ -37,12 +37,12 @@ create table programs (
 			created_at timestamp not null, 
 			updated_at timestamp not null
 			);
-create table module_to_curse (
+create table course_modules (
 				primary key (module_id, course_id), 
 				module_id bigint references modules(id) not null, 
 				course_id bigint references courses(id) not null
 				);
-create table module_to_program (
+create table program_modules (
 				primary key (module_id, program_id), 
 				module_id bigint references modules(id) not null, 
 				program_id bigint references programs(id) not null
@@ -105,14 +105,14 @@ create table quizzes (
   			lesson_id bigint references lessons(id) not null,
 			user_id bigint references users(id) not null,
   			name varchar(255) not null,
-  			text text not null,
+  			content text not null,
   			created_at timestamp not null, 
 			updated_at timestamp not null
 			);
 create table exercises (
   			id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   			lesson_id bigint references lessons(id) not null,
-  			title varchar(255) not null,
+  			name varchar(255) not null,
   			url text not null,
   			created_at timestamp not null, 
 			updated_at timestamp not null
