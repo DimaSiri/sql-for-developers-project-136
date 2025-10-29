@@ -26,7 +26,7 @@ create table lessons (
 			position int, 
 			created_at timestamp not null, 
 			updated_at timestamp not null, 
-			course_id bigint references courses(id) not null,
+			course_id bigint references courses(id),
 			deleted_at timestamp
 			);
 create table programs (
