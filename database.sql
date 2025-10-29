@@ -103,7 +103,6 @@ create table certificates (
 create table quizzes (
   			id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   			lesson_id bigint references lessons(id) not null,
-			user_id bigint references users(id) not null,
   			name varchar(255) not null,
   			content text not null,
   			created_at timestamp not null, 
@@ -120,14 +119,15 @@ create table exercises (
 create table discussions (
   				id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   				lesson_id bigint references lessons(id) not null,
-  				content text not null,
+  				user_id bigint references users(id) not null,
+				text text not null,
   				created_at timestamp not null, 
 				updated_at timestamp not null
 				);
 create table blogs (
   			id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   			user_id bigint references users(id) not null,
-  			title varchar(255) not null,
+  			name varchar(255) not null,
   			content text not null,
   			status blog_status not null,
   			created_at timestamp not null, 
