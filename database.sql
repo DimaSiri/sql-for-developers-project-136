@@ -23,7 +23,7 @@ create table lessons (
 			name varchar(255) not null, 
 			content text not null, 
 			video_url varchar(255), 
-			position int not null, 
+			position int, 
 			created_at timestamp not null, 
 			updated_at timestamp not null, 
 			course_id bigint references courses(id) not null,
