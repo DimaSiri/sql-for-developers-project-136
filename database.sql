@@ -77,7 +77,7 @@ create table payments (
   			enrollment_id bigint references enrollments(id) not null,
   			amount numeric(10,2) not null,
   			status payments_status not null,
-  			paid_at timestamp,
+  			paid_at timestamp not null,
   			created_at timestamp not null, 
 			updated_at timestamp not null
 			);
@@ -86,7 +86,7 @@ create table program_completions (
   					user_id bigint references users(id) not null,
   					program_id bigint references programs(id) not null,
   					status program_status not null,
-  					started_at date not null,
+  					started_at date,
   					completed_at date,
   					created_at timestamp not null, 
 					updated_at timestamp not null
