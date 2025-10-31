@@ -120,7 +120,7 @@ create table discussions (
   				id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   				lesson_id bigint references lessons(id) not null,
   				user_id bigint references users(id) not null,
-				text text not null,
+				text jsonb not null,
   				created_at timestamp not null, 
 				updated_at timestamp not null
 				);
