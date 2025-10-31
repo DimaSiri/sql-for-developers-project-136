@@ -77,7 +77,7 @@ create table payments (
   			enrollment_id bigint references enrollments(id) not null,
   			amount numeric(10,2) not null,
   			status payments_status not null,
-  			paid_at timestamp not null,
+  			paid_at timestamp,
   			created_at timestamp not null, 
 			updated_at timestamp not null
 			);
